@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - DigitalKitab</title>
+    <link rel="stylesheet" href="Style/ReadingPage.css">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="reading-nav">
+        <div class="nav-left">
+            <a href="UserDashboard.html" class="back-btn">← Back to Dashboard</a>
+            <div class="book-title-nav" id="bookTitleNav">Loading...</div>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn" onclick="toggleBookmarks()" title="Bookmarks">🔖 Bookmarks</button>
+            <button class="nav-btn" onclick="toggleSettings()" title="Settings">⚙️ Settings</button>
+            <div class="profile-pic">SK</div>
+        </div>
+    </nav>
+
+    <!-- Main Reading Area -->
+    <div class="reading-container">
+        <!-- Sidebar - Table of Contents -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>📑 Contents</h3>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+            <div class="chapters-list" id="chaptersList">
+                <!-- Chapters will be loaded here -->
+            </div>
+        </aside>
+
+        <!-- Reading Content -->
+        <main class="reading-main">
+            <!-- Book Info Header -->
+            <div class="book-header" id="bookHeader">
+                <div class="book-cover-large">📖</div>
+                <div class="book-info">
+                    <h1 id="bookTitle">Loading...</h1>
+                    <p class="book-author" id="bookAuthor">by Author Name</p>
+                    <p class="book-meta" id="bookMeta">Category • ISBN</p>
+                    <div class="reading-progress-header">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="headerProgress" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="headerProgressText">0% Complete</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reading Content Area -->
+            <article class="reading-content" id="readingContent">
+                <div class="chapter-title" id="chapterTitle">Chapter 1</div>
+                <div class="chapter-content" id="chapterContent">
+                    <p>Loading book content...</p>
+                </div>
+            </article>
+
+            <!-- Navigation Buttons -->
+            <div class="page-navigation">
+                <button class="nav-page-btn" id="prevBtn" onclick="previousChapter()">
+                    ← Previous Chapter
+                </button>
+                <div class="page-info" id="pageInfo">Chapter 1 of 12</div>
+                <button class="nav-page-btn" id="nextBtn" onclick="nextChapter()">
+                    Next Chapter →
+                </button>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Tools -->
+        <aside class="tools-sidebar" id="toolsSidebar">
+            <button class="tool-btn" onclick="toggleSidebar()" title="Table of Contents">
+                📑<span>Contents</span>
+            </button>
+            <button class="tool-btn" onclick="addBookmark()" title="Add Bookmark">
+                🔖<span>Bookmark</span>
+            </button>
+            <button class="tool-btn" onclick="increaseFontSize()" title="Increase Font">
+                🔤<span>A+</span>
+            </button>
+            <button class="tool-btn" onclick="decreaseFontSize()" title="Decrease Font">
+                🔡<span>A-</span>
+            </button>
+            <button class="tool-btn" onclick="toggleTheme()" title="Toggle Theme">
+                🌙<span>Theme</span>
+            </button>
+        </aside>
+    </div>
+
+    <!-- Bookmarks Panel -->
+    <div class="modal" id="bookmarksModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔖 My Bookmarks</h3>
+                <button class="close-btn" onclick="toggleBookmarks()">✕</button>
+            </div>
+            <div class="bookmarks-list" id="bookmarksList">
+                <p style="text-align: center; color: #666; padding: 2rem;">No bookmarks yet. Click the bookmark button
+                    while reading to save your place!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ Reading Settings</h3>
+                <button class="close-btn" onclick="toggleSettings()">✕</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-group">
+                    <label>Font Size</label>
+                    <div class="font-size-controls">
+                        <button class="btn-secondary" onclick="decreaseFontSize()">A-</button>
+                        <span id="fontSizeDisplay">16px</span>
+                        <button class="btn-secondary" onclick="increaseFontSize()">A+</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>Theme</label>
+                    <div class="theme-options">
+                        <button class="theme-btn active" onclick="setTheme('light')">☀️ Light</button>
+                        <button class="theme-btn" onclick="setTheme('dark')">🌙 Dark</button>
+                        <button class="theme-btn" onclick="setTheme('sepia')">📜 Sepia</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>
+                        <input type="checkbox" id="autoSaveProgress" checked>
+                        Auto-save reading progress
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reading Timer Display -->
+    <div class="reading-timer" id="readingTimer">
+        ⏱️ <span id="timerDisplay">00:00</span>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/reading.js"></script>
+</body>
+
+</html>

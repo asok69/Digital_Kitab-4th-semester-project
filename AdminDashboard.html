@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - DigitalKitab</title>
+    <link rel="stylesheet" href="Style/AdminDashboard.css">
+    <script src="JS/api.js"></script>
+    <script src="JS/admin.js"></script>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            📚 DigitalKitab
+            <span class="admin-badge">ADMIN</span>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span class="nav-icon">🏠</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📚</span>
+                        <span>Manage Books</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">👥</span>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📁</span>
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📝</span>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <div class="welcome-text">
+                <h2>Admin Dashboard 👨‍💼</h2>
+                <p>Manage your digital library efficiently</p>
+            </div>
+            <div class="top-actions">
+                <button class="btn btn-primary" onclick="openAddBookModal()">
+                    ➕ Add New Book
+                </button>
+                <div class="profile-pic">AD</div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">📚</div>
+                <div class="stat-info">
+                    <h3 id="totalBooks">1,245</h3>
+                    <p>Total Books</p>
+                    <div class="stat-change">↑ 12 this week</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">👥</div>
+                <div class="stat-info">
+                    <h3>5,432</h3>
+                    <p>Active Users</p>
+                    <div class="stat-change">↑ 8.5% from last month</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">📖</div>
+                <div class="stat-info">
+                    <h3>12,890</h3>
+                    <p>Books Borrowed</p>
+                    <div class="stat-change">↑ 15% this month</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">⭐</div>
+                <div class="stat-info">
+                    <h3>4.8</h3>
+                    <p>Avg Rating</p>
+                    <div class="stat-change">↑ 0.3 from last month</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Manage Books</h3>
+                <button class="btn btn-primary" onclick="openAddBookModal()">➕ Add Book</button>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="🔍 Search books by title, author, or ISBN..." onkeyup="filterBooks()">
+                <select class="filter-select" id="categoryFilter" onchange="filterBooks()">
+                    <option value="">All Categories</option>
+                    <option>Computer Science</option>
+                    <option>Mathematics</option>
+                    <option>Engineering</option>
+                    <option>Business</option>
+                    <option>Literature</option>
+                    <option>Software Engineering</option>
+                    <option>Software Design</option>
+                    <option>Database</option>
+                </select>
+                <select class="filter-select" id="statusFilter" onchange="filterBooks()">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Category</th>
+                            <th>ISBN</th>
+                            <th>Status</th>
+                            <th>Borrowed</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="booksTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Activity</h3>
+            </div>
+            <ul class="activity-list" id="activityList"></ul>
+        </div>
+    </main>
+
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Book</h3>
+                <button class="close-btn" onclick="closeModal()">✖</button>
+            </div>
+            <form id="bookForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="bookTitle">Book Title *</label>
+                    <input type="text" id="bookTitle" required placeholder="Enter book title">
+                </div>
+                <div class="form-group">
+                    <label for="bookAuthor">Author *</label>
+                    <input type="text" id="bookAuthor" required placeholder="Enter author name">
+                </div>
+                <div class="form-group">
+                    <label for="bookISBN">ISBN *</label>
+                    <input type="text" id="bookISBN" required placeholder="978-XXXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="bookCategory">Category *</label>
+                    <select id="bookCategory" required>
+                        <option value="">Select category</option>
+                        <option>Computer Science</option>
+                        <option>Mathematics</option>
+                        <option>Engineering</option>
+                        <option>Business</option>
+                        <option>Literature</option>
+                        <option>Science</option>
+                        <option>History</option>
+                        <option>Software Engineering</option>
+                        <option>Software Design</option>
+                        <option>Database</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bookDescription">Description</label>
+                    <textarea id="bookDescription" placeholder="Enter book description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="bookStatus">Status *</label>
+                    <select id="bookStatus" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+</body>
+
+</html>

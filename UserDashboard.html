@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - DigitalKitab</title>
+    <link rel="stylesheet" href="Style/UserDashboard.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">📚 DigitalKitab</div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="UserDashboard.html" class="nav-link active">
+                        <span class="nav-icon">🏠</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📚</span>
+                        <span>My Library</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🔍</span>
+                        <span>Browse Books</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🔖</span>
+                        <span>Bookmarks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span>Reading Stats</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🏆</span>
+                        <span>Achievements</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="welcome-text">
+                <h2>Welcome back, Student! 👋</h2>
+                <p>Continue your learning journey</p>
+            </div>
+            <div class="user-profile">
+                <div class="notifications">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="profile-pic">SK</div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">📖</div>
+                <div class="stat-info">
+                    <h3>0</h3>
+                    <p>Books Read</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">⏱️</div>
+                <div class="stat-info">
+                    <h3>0h</h3>
+                    <p>Reading Time</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">🔥</div>
+                <div class="stat-info">
+                    <h3>0</h3>
+                    <p>Day Streak</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">🏆</div>
+                <div class="stat-info">
+                    <h3>0</h3>
+                    <p>Badges Earned</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Current Reading -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Continue Reading</h3>
+                    <a href="#" class="view-all">View All →</a>
+                </div>
+
+                <div class="reading-item">
+                    <div class="book-cover">📘</div>
+                    <div class="reading-info">
+                        <h4>Introduction to Algorithms</h4>
+                        <p>by Thomas H. Cormen</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <div class="progress-text">Chapter 5 of 12 • 65% Complete</div>
+                    </div>
+                </div>
+
+                <div class="reading-item">
+                    <div class="book-cover">📗</div>
+                    <div class="reading-info">
+                        <h4>Clean Code</h4>
+                        <p>by Robert C. Martin</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 42%"></div>
+                        </div>
+                        <div class="progress-text">Chapter 3 of 17 • 42% Complete</div>
+                    </div>
+                </div>
+
+                <div class="reading-item">
+                    <div class="book-cover">📙</div>
+                    <div class="reading-info">
+                        <h4>Digital Marketing Fundamentals</h4>
+                        <p>by Rob Stokes</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 28%"></div>
+                        </div>
+                        <div class="progress-text">Chapter 2 of 10 • 28% Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements & Streak -->
+            <div>
+                <div class="streak-container">
+                    <div class="streak-icon">🔥</div>
+                    <div class="streak-number">0</div>
+                    <p>Day Reading Streak</p>
+                    <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Keep it up! Read today to maintain
+                        your streak</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Achievements</h3>
+                    </div>
+                    <div class="achievements-grid">
+                        <div class="achievement-badge earned">
+                            <div class="badge-icon">📚</div>
+                            <h4>Bookworm</h4>
+                            <p>Read 20 books</p>
+                        </div>
+                        <div class="achievement-badge earned">
+                            <div class="badge-icon">⏰</div>
+                            <h4>Night Owl</h4>
+                            <p>100 hours read</p>
+                        </div>
+                        <div class="achievement-badge earned">
+                            <div class="badge-icon">🔥</div>
+                            <h4>Consistent</h4>
+                            <p>10 day streak</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <div class="badge-icon">🌟</div>
+                            <h4>Scholar</h4>
+                            <p>Read 50 books</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Books -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Recommended for You</h3>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="books-grid">
+                <!-- Books will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/student.js"></script>
+    <script>
+        // Check authentication on page load
+        window.addEventListener('DOMContentLoaded', function () {
+            // You can add authentication check here if needed
+        });
+    </script>
+</body>
+
+</html>

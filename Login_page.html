@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DigitalKitab</title>
+    <link rel="stylesheet" href="Style/Login_page.css">
+    <style>
+        /* Password Toggle Styles */
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            transition: all 0.3s;
+            z-index: 10;
+            border-radius: 4px;
+        }
+
+        .toggle-password:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group .input-wrapper input {
+            padding-right: 3.5rem !important;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-home">← Back to Home</a>
+    <div class="login-container">
+        <div class="login-left">
+            <h1>📚 DigitalKitab</h1>
+            <p>Access thousands of books and track your learning journey</p>
+            <div class="feature-list">
+                <div>Unlimited book access 24/7</div>
+                <div>Track your reading progress</div>
+                <div>Earn badges and rewards</div>
+                <div>No physical burden</div>
+                <div>Smart bookmarking tools</div>
+            </div>
+        </div>
+        <div class="login-right">
+            <div class="logo-small">📚 DigitalKitab</div>
+            <div class="login-header">
+                <h2>Welcome Back!</h2>
+                <p>Please login to your account</p>
+            </div>
+            <div class="error-message" id="errorMessage">Invalid credentials. Please try again.</div>
+            <div class="role-selector">
+                <div class="role-btn active" id="studentBtn" onclick="selectRole('student')">
+                    <div class="icon">👨‍🎓</div>
+                    <div>Student</div>
+                </div>
+                <div class="role-btn" id="adminBtn" onclick="selectRole('admin')">
+                    <div class="icon">👨‍💼</div>
+                    <div>Admin</div>
+                </div>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" onclick="toggleLoginPassword()"
+                            aria-label="Toggle password visibility">
+                            <span id="password-toggle-icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="divider">OR</div>
+            <div class="signup-link">Don't have an account? <a href="Signup_page.html">Sign up here</a></div>
+        </div>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script>
+        // Inline password toggle function
+        function toggleLoginPassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('password-toggle-icon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = '👁️‍🗨️';
+            } else {
+                input.type = 'password';
+                icon.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+
+</html>
