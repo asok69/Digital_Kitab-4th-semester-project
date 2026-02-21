@@ -281,7 +281,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add active state to nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
-            e.preventDefault();
+            if (this.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             this.classList.add('active');
         });

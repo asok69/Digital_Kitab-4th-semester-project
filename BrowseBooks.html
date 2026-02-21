@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books - DigitalKitab</title>
+    <link rel="stylesheet" href="Style/BrowseBooks.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">📚 DigitalKitab</div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="UserDashboard.html" class="nav-link">
+                        <span class="nav-icon">🏠</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📚</span>
+                        <span>My Library</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="BrowseBooks.html" class="nav-link active">
+                        <span class="nav-icon">🔍</span>
+                        <span>Browse Books</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🔖</span>
+                        <span>Bookmarks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span>Reading Stats</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🏆</span>
+                        <span>Achievements</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <div class="page-header">
+            <div class="header-text">
+                <h2>Browse Books 🔍</h2>
+                <p>Discover your next great read from our collection</p>
+            </div>
+            <div class="profile-pic">AK</div>
+        </div>
+
+        <!-- Search Hero -->
+        <div class="search-hero">
+            <div class="search-wrapper">
+                <span class="search-icon-big">🔍</span>
+                <input type="text" id="searchInput" class="search-input-main"
+                    placeholder="Search by title, author, or ISBN..." oninput="handleSearch()" autocomplete="off" />
+                <button class="clear-btn" id="clearBtn" onclick="clearSearch()" style="display:none;">✖</button>
+            </div>
+
+            <!-- Filter Row -->
+            <div class="filter-row">
+                <select id="categoryFilter" class="filter-pill" onchange="handleSearch()">
+                    <option value="">📁 All Categories</option>
+                    <option value="Computer Science">💻 Computer Science</option>
+                    <option value="Mathematics">➗ Mathematics</option>
+                    <option value="Engineering">⚙️ Engineering</option>
+                    <option value="Business">💼 Business</option>
+                    <option value="Literature">📖 Literature</option>
+                    <option value="Science">🔬 Science</option>
+                    <option value="History">🏛️ History</option>
+                    <option value="Software Engineering">🛠️ Software Engineering</option>
+                    <option value="Software Design">🎨 Software Design</option>
+                    <option value="Database">🗄️ Database</option>
+                </select>
+
+                <div class="results-count" id="resultsCount"></div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Searching books...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <div class="empty-icon">📭</div>
+            <h3>No books found</h3>
+            <p>Try a different keyword or browse all categories</p>
+            <button class="btn-reset" onclick="clearSearch()">Show All Books</button>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-grid" id="booksGrid"></div>
+
+    </main>
+
+    <!-- Book Detail Modal -->
+    <div class="modal-overlay" id="bookModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal()">✖</button>
+            <div class="modal-body">
+                <div class="modal-book-cover" id="modalCover">📘</div>
+                <div class="modal-info">
+                    <span class="modal-category-tag" id="modalCategory"></span>
+                    <h2 id="modalTitle"></h2>
+                    <p class="modal-author" id="modalAuthor"></p>
+                    <p class="modal-isbn" id="modalISBN"></p>
+                    <p class="modal-desc" id="modalDesc"></p>
+                    <div class="modal-actions">
+                        <button class="btn-read" onclick="readBook()">📖 Read Now</button>
+                        <button class="btn-cancel" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/BrowseBooks.js"></script>
+</body>
+
+</html>
